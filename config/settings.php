@@ -1,5 +1,8 @@
 <?php
 return [
+    // ---------------------------
+    // Paramètres de l'application
+    // ---------------------------
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
@@ -12,6 +15,9 @@ return [
         ],
     ],
 
+    // ---------------------------
+    // Erreurs
+    // ---------------------------
     'notFoundHandler' => function ($container) {
         return function ($request, $response) use ($container) {
             return $container['response']
@@ -28,5 +34,12 @@ return [
                 ->withHeader('Content-Type', 'text/html')
                 ->write('Method not allowed');
         };
-    }
+    },
+
+    // ---------------------------
+    // Constantes
+    // ---------------------------
+    'WEBSERVICE_URL' => 'http://mysoap.local/test',
+    'BASE_DIR' => __DIR__ . '/..'
+
 ];

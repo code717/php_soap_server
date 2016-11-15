@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mysoap.local/test" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="MyServices" targetNamespace="http://mysoap.local/test">
+    <types>
+        <xsd:schema targetNamespace="http://mysoap.local/test"/>
+    </types>
+    <portType name="MyServicesPort">
+        <operation name="SayHello">
+            <documentation>Use test soap service</documentation>
+            <input message="tns:SayHelloIn"/>
+            <output message="tns:SayHelloOut"/>
+        </operation>
+    </portType>
+    <binding name="MyServicesBinding" type="tns:MyServicesPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="SayHello">
+            <soap:operation soapAction="http://mysoap.local/test#SayHello"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://mysoap.local/test"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://mysoap.local/test"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MyServicesService">
+        <port name="MyServicesPort" binding="tns:MyServicesBinding">
+            <soap:address location="http://mysoap.local/test"/>
+        </port>
+    </service>
+    <message name="SayHelloIn">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="SayHelloOut">
+        <part name="return" type="xsd:string"/>
+    </message>
+</definitions>
