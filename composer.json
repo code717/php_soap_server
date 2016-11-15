@@ -1,5 +1,5 @@
 {
-    "name": "slim/slim-skeleton",
+    "name": "dev/soap_server",
     "require": {
         "php": ">=5.5.0",
         "slim/slim": "^3.1",
